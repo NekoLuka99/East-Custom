@@ -172,12 +172,11 @@ header h1 {
   color: #111;
   border: none;
   padding: 10px 20px;
-  margin: 60px 0 20px 40px; /* Top-Margin erhöht, links eingerückt */
+  margin: 80px 0 30px 20px; /* top | right | bottom | left */
   border-radius: 5px;
   cursor: pointer;
-  display: none; /* Wird erst nach Login sichtbar */
-  float: left; /* Links ausrichten */
-}
+  display: none; /* nur sichtbar nach Login */
+  align-self: flex-start; /* falls in flex-container */
 }
 
 #logoutBtn {
