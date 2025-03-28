@@ -3,23 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>East-Bikes Tabs</title>
+  <title>LS-Automobile</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>LS-Automobile</h1>
     <nav class="tabs">
-      <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
+      <button onclick="switchTab('kaufbar')" class="active">Kaufbare Fahrzeuge</button>
       <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
     </nav>
   </header>
 
   <section id="kaufbar" class="tab-content active">
+  <div class="category-group"><h2>Kompaktwagen</h2><div class="category-grid" id="grid-bestell-kompaktwagen"></div></div>
+  <div class="category-group"><h2>Vans</h2><div class="category-grid" id="grid-bestell-vans"></div></div>
+  <div class="category-group"><h2>Coupes</h2><div class="category-grid" id="grid-bestell-coupes"></div></div>
+  <div class="category-group"><h2>Muscle</h2><div class="category-grid" id="grid-bestell-muscle"></div></div>
+  <div class="category-group"><h2>Off-Road</h2><div class="category-grid" id="grid-bestell-offroad"></div></div>
+  <div class="category-group"><h2>SUV</h2><div class="category-grid" id="grid-bestell-suv"></div></div>
+  <div class="category-group"><h2>Sedans</h2><div class="category-grid" id="grid-bestell-sedans"></div></div>
+  <div class="category-group"><h2>Sport</h2><div class="category-grid" id="grid-bestell-sport"></div></div>
+  <div class="category-group"><h2>Classic Sport</h2><div class="category-grid" id="grid-bestell-classicsport"></div></div>
+  <div class="category-group"><h2>Super Sport</h2><div class="category-grid" id="grid-bestell-supersport"></div></div>
+    
     <div class="category-grid" id="grid-kaufbar"></div>
   </section>
 
   <section id="bestellbar" class="tab-content">
+  <div class="category-group"><h2>Kompaktwagen</h2><div class="category-grid" id="grid-bestell-kompaktwagen"></div></div>
+  <div class="category-group"><h2>Vans</h2><div class="category-grid" id="grid-bestell-vans"></div></div>
+  <div class="category-group"><h2>Coupes</h2><div class="category-grid" id="grid-bestell-coupes"></div></div>
+  <div class="category-group"><h2>Muscle</h2><div class="category-grid" id="grid-bestell-muscle"></div></div>
+  <div class="category-group"><h2>Off-Road</h2><div class="category-grid" id="grid-bestell-offroad"></div></div>
+  <div class="category-group"><h2>SUV</h2><div class="category-grid" id="grid-bestell-suv"></div></div>
+  <div class="category-group"><h2>Sedans</h2><div class="category-grid" id="grid-bestell-sedans"></div></div>
+  <div class="category-group"><h2>Sport</h2><div class="category-grid" id="grid-bestell-sport"></div></div>
+  <div class="category-group"><h2>Classic Sport</h2><div class="category-grid" id="grid-bestell-classicsport"></div></div>
+  <div class="category-group"><h2>Super Sport</h2><div class="category-grid" id="grid-bestell-supersport"></div></div>
+
     <div class="category-grid" id="grid-bestellbar"></div>
   </section>
 
