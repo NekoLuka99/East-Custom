@@ -172,14 +172,12 @@ header h1 {
   color: #111;
   border: none;
   padding: 10px 20px;
-  margin: 50px 0 15px 0;
+  margin: 60px 0 20px 40px; /* Top-Margin erhöht, links eingerückt */
   border-radius: 5px;
   cursor: pointer;
+  display: none; /* Wird erst nach Login sichtbar */
+  float: left; /* Links ausrichten */
 }
-
-/* NEU: Button standardmäßig verstecken */
-#addBtn {
-  display: none;
 }
 
 #logoutBtn {
