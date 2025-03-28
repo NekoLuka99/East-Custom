@@ -150,3 +150,8 @@ header h1 {
   cursor: pointer;
 }
 
+/* NEU: Button standardmäßig verstecken */
+#addBtn {
+  display: none;
+}
+
