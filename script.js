@@ -23,14 +23,23 @@ const bestellbareFahrzeuge = [
 ];
 
 function switchTab(tabId) {
+  // Alle Inhalte verstecken
   document.querySelectorAll('.tab-content').forEach(section => {
     section.classList.remove('active');
   });
+
+  // Den aktiven Bereich zeigen
   document.getElementById(tabId).classList.add('active');
 
-  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-  const activeBtn = Array.from(document.querySelectorAll('.tabs button'))
-    .find(btn => btn.getAttribute('onclick')?.includes(tabId));
+  // Alle Buttons deaktivieren
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // Aktiven Button markieren
+  const activeBtn = Array.from(document.querySelectorAll('.tabs button')).find(btn =>
+    btn.getAttribute('onclick')?.includes(tabId)
+  );
   if (activeBtn) activeBtn.classList.add('active');
 }
 
