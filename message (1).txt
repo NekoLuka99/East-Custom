@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTA 5 Motorradshop</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    header {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #ff9800;
+    }
+    header h1 {
+      margin: 0;
+      color: #ff9800;
+      font-size: 32px;
+    }
+    .filters {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .filters input,
+    .filters select,
+    .filters button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    .filters button {
+      background-color: #ff9800;
+      color: #fff;
+      cursor: pointer;
+    }
+    .subcategory {
+      margin: 40px auto;
+      max-width: 1200px;
+      padding: 0 20px;
+      display: none;
+    }
+    .subcategory h2 {
+      text-align: left;
+      border-bottom: 1px solid #ff9800;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .category-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .category-item {
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      padding: 15px;
+      width: 250px;
+      height: 400px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .category-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
+    }
+    .category-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .category-item p {
+      margin: 0;
+      font-size: 14px;
+      color: #ddd;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .category-item p strong:last-of-type {
+      color: #00e676;
+      font-size: 15px;
+      margin-top: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      .category-item {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .popup-content {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+    .popup-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .popup-content .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #ff9800;
+    }
+    footer {
+      background-color: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      border-top: 1px solid #444;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏍️ GTA 5 Motorradshop</h1>
+  </header>
+
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Fahrzeug suchen..." onkeyup="searchVehicles()" />
+    <select id="categoryFilter" onchange="searchVehicles()">
+      <option value="" disabled selected hidden>Bitte wählen</option>
+      <option value="all">Alle Kategorien</option>
+      <option value="sportbikes">Sportbikes</option>
+      <option value="chopper">Chopper</option>
+      <option value="offroad">Offroad</option>
+      <option value="elektro">Elektro</option>
+      <option value="klassiker">Klassiker</option>
+      <option value="roller">Roller</option>
+      <option value="quads">Quads</option>
+    </select>
+    <button onclick="resetFilters()">🔄 Zurücksetzen</button>
+  </div>
+
+<div id="motorradStory" style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #2a2a2a; border-radius: 10px; font-size: 16px; line-height: 1.6;">
+  <h2 style="color:#ff9800;">🏍️ Die Geschichte des Motorrads</h2>
+  <p>Die Ursprünge des Motorrads reichen zurück bis ins Jahr <strong>1885</strong>, als <strong>Gottlieb Daimler</strong> und <strong>Wilhelm Maybach</strong> in Deutschland den ersten motorisierten Zweirad-Prototypen entwickelten – den sogenannten <em>„Reitwagen“</em>.</p>
+  <p>In den darauffolgenden Jahrzehnten entwickelten sich Motorräder vom praktischen Fortbewegungsmittel hin zu Symbolen von <strong>Freiheit, Rebellion und Abenteuer</strong>. Marken wie <strong>Harley-Davidson</strong> und <strong>Indian</strong> dominierten früh den amerikanischen Markt, während <strong>BMW</strong>, <strong>Honda</strong> und <strong>Kawasaki</strong> später den globalen Markt eroberten.</p>
+  <p>Heute gibt es Motorräder in unzähligen Variationen: vom klassischen <strong>Chopper</strong> über sportliche <strong>Rennmaschinen</strong> bis hin zu umweltfreundlichen <strong>Elektrobikes</strong>. Sie verkörpern nicht nur Mobilität, sondern auch Lifestyle, Technik und Leidenschaft.</p>
+  <p style="margin-top:20px;"><em>„Zwei Räder bewegen den Körper, aber ein Motorrad bewegt die Seele.“</em></p>
+</div>
+
+
+
+  
+        <section class="subcategory">
+          <h2>Sportbikes</h2>
+          <div class="category-grid">
+            
+    <div class="category-item" data-category="sportbikes" data-price="15000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/4/45/Bati801-GTAV.png" alt="Pegassi Bati 801" />
+        <p>
+          <strong>Pegassi Bati 801</strong><br />
+          Sportbike mit hoher Geschwindigkeit.<br />
+          <strong>Preis:</strong> 15000$ 
+        </p>
+    </div>
+    
+    <div class="category-item" data-category="sportbikes" data-price="20000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/3/3f/HakuchouDrag-GTAO.png" alt="Shitzu Hakuchou Drag" />
+        <p>
+          <strong>Shitzu Hakuchou Drag</strong><br />
+          High-Performance Motorrad.<br />
+          <strong>Preis:</strong> 20000$ 
+        </p>
+    </div>
+    
+    <div class="category-item" data-category="sportbikes" data-price="22000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/e/e4/Shotaro-GTAO.png" alt="Nagasaki Shotaro" />
+        <p>
+          <strong>Nagasaki Shotaro</strong><br />
+          Futuristisches Motorrad mit extremer Beschleunigung.<br />
+          <strong>Preis:</strong> 22000$ 
+        </p>
+    </div>
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Chopper</h2>
+          <div class="category-grid">
+            
+    <div class="category-item" data-category="chopper" data-price="12000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/f/f6/Bagger-GTAV.png" alt="Western Bagger" />
+        <p>
+          <strong>Western Bagger</strong><br />
+          Klassischer Cruiser für lange Fahrten.<br />
+          <strong>Preis:</strong> 12000$ 
+        </p>
+    </div>
+    
+    <div class="category-item" data-category="chopper" data-price="13500">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/1/1f/Sovereign-GTAV.png" alt="Western Sovereign" />
+        <p>
+          <strong>Western Sovereign</strong><br />
+          Chopper im amerikanischen Stil mit Flagge.<br />
+          <strong>Preis:</strong> 13500$ 
+        </p>
+    </div>
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Elektro</h2>
+          <div class="category-grid">
+            
+    <div class="category-item" data-category="elektro" data-price="18000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/c/c8/Lectro-GTAO.png" alt="Principe Lectro" />
+        <p>
+          <strong>Principe Lectro</strong><br />
+          Elektro-Motorrad mit futuristischem Design und KERS-Boost.<br />
+          <strong>Preis:</strong> 18000$ 
+        </p>
+    </div>
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Klassiker</h2>
+          <div class="category-grid">
+            
+    <div class="category-item" data-category="klassiker" data-price="12500">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/6/65/Hexer-GTAV.png" alt="LCC Hexer" />
+        <p>
+          <strong>LCC Hexer</strong><br />
+          Zeitloser Klassiker aus der Biker-Szene.<br />
+          <strong>Preis:</strong> 12500$ 
+        </p>
+    </div>
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Roller</h2>
+          <div class="category-grid">
+            
+    <div class="category-item" data-category="roller" data-price="5000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/6/66/Faggio-GTAV.png" alt="Pegassi Faggio" />
+        <p>
+          <strong>Pegassi Faggio</strong><br />
+          Kleiner Stadtroller mit Retro-Charme.<br />
+          <strong>Preis:</strong> 5000$ 
+        </p>
+    </div>
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Quads</h2>
+          <div class="category-grid">
+            
+    <div class="category-item" data-category="quads" data-price="15500">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/6/6a/Blazer-GTAV.png" alt="Nagasaki Blazer" />
+        <p>
+          <strong>Nagasaki Blazer</strong><br />
+          Robuster Quad für alle Geländearten.<br />
+          <strong>Preis:</strong> 15500$ 
+        </p>
+    </div>
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Offroad</h2>
+          <div class="category-grid">
+            
+    <div class="category-item" data-category="offroad" data-price="9000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/e/e0/Sanchez-GTAV.png" alt="Maibatsu Sanchez" />
+        <p>
+          <strong>Maibatsu Sanchez</strong><br />
+          Perfekt für Offroad-Abenteuer mit hoher Wendigkeit.<br />
+          <strong>Preis:</strong> 9000$ 
+        </p>
+    </div>
+    
+    <div class="category-item" data-category="offroad" data-price="11000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/2/25/CarbonRS-GTAV.png" alt="Nagasaki Carbon RS" />
+        <p>
+          <strong>Nagasaki Carbon RS</strong><br />
+          Leichtes Offroad-Motorrad mit Carbon-Optik.<br />
+          <strong>Preis:</strong> 11000$ 
+        </p>
+    </div>
+    
+    <div class="category-item" data-category="offroad" data-price="9500">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/d/d1/Enduro-GTAV.png" alt="Dinka Enduro" />
+        <p>
+          <strong>Dinka Enduro</strong><br />
+          Leichtes und agiles Motorrad für unwegsames Gelände.<br />
+          <strong>Preis:</strong> 9500$ 
+        </p>
+    </div>
+    
+    <div class="category-item" data-category="offroad" data-price="12500">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/e/ed/ManchezScout-GTAO.png" alt="Maibatsu Manchez Scout" />
+        <p>
+          <strong>Maibatsu Manchez Scout</strong><br />
+          Militärisches Offroad-Motorrad mit guter Geländetauglichkeit.<br />
+          <strong>Preis:</strong> 12500$ 
+        </p>
+    </div>
+    
+    <div class="category-item" data-category="offroad" data-price="10000">
+        <img src="https://static.wikia.nocookie.net/gtawiki/images/0/01/Manchez-GTAV.png" alt="Maibatsu Manchez" />
+        <p>
+          <strong>Maibatsu Manchez</strong><br />
+          Offroad-Klassiker mit hohem Grip auf jedem Untergrund.<br />
+          <strong>Preis:</strong> 10000$ 
+        </p>
+    </div>
+    
+          </div>
+        </section>
+        
+
+        <div class="popup-overlay" id="popup">
+          <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <img id="popupImg" src="" alt="Fahrzeugbild" />
+            <h2 id="popupTitle"></h2>
+            <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
+            <p id="popupDesc"></p>
+            <p><strong id="popupPrice"></strong></p>
+            <div id="popupSpecs" style="margin-top: 15px; text-align: left;">
+              <h3 style="color:#ff9800;">Technische Daten</h3>
+              <ul style="list-style: none; padding-left: 0;">
+                <li><strong>Höchstgeschwindigkeit:</strong> <span id="specSpeed"></span></li>
+                <li><strong>Beschleunigung:</strong> <span id="specAcceleration"></span></li>
+                <li><strong>Gewicht:</strong> <span id="specWeight"></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+        <footer>
+          <p><strong>Impressum</strong></p>
+          <p>Max Mustermann<br>
+          Musterstraße 123<br>
+          12345 Musterstadt<br>
+          Telefon: 0123 / 4567890<br>
+          E-Mail: info@gta-motorradshop.de</p>
+        </footer>
+      
+        <script>
+          function searchVehicles() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categoryFilter').value;
+            const allSections = document.querySelectorAll('.subcategory');
+      
+            allSections.forEach(section => {
+              let hasVisibleItems = false;
+              const items = section.querySelectorAll('.category-item');
+      
+              items.forEach(item => {
+                const title = item.querySelector('strong')?.innerText.toLowerCase() || '';
+                const description = item.innerText.toLowerCase();
+                const category = item.getAttribute('data-category');
+      
+                const matchesSearch = title.includes(searchInput) || description.includes(searchInput);
+                const matchesCategory =
+                  selectedCategory === 'all' || selectedCategory === category || selectedCategory === '';
+      
+                const shouldShow = (!searchInput && matchesCategory) || (matchesSearch && matchesCategory);
+      
+                if (shouldShow) {
+                  item.style.display = 'flex';
+                  hasVisibleItems = true;
+                } else {
+                  item.style.display = 'none';
+                }
+              });
+      
+              section.style.display = hasVisibleItems ? 'block' : 'none';
+            });
+          }
+      
+          function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.querySelectorAll('.subcategory').forEach(section => {
+              section.style.display = 'none';
+              section.querySelectorAll('.category-item').forEach(item => {
+                item.style.display = 'none';
+              });
+            });
+          }
+      
+          function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+          }
+        </script>
+      </body>
+      </html>
+      
