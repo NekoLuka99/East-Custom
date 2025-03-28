@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>East-Bikes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🏍️ East-Bikes 🏍️</h1>
+  </header>
+
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Fahrzeug suchen..." onkeyup="searchVehicles()" />
+    <select id="categoryFilter" onchange="searchVehicles()">
+      <option value="" disabled selected hidden>Bitte wählen</option>
+      <option value="all">Alle Kategorien</option>
+      <option value="sportbikes">Sportbikes</option>
+      <option value="chopper">Chopper</option>
+      <option value="offroad">Offroad</option>
+      <option value="elektro">Elektro</option>
+      <option value="klassiker">Klassiker</option>
+      <option value="roller">Roller</option>
+      <option value="quads">Quads</option>
+    </select>   
+    <button onclick="resetFilters()">🔄 Zurücksetzen</button>
+  </div>
+
+  <div id="motorradStory">
+    <h2 style="color:#ff9800;">🏍️ Die Geschichte des Motorrads</h2>
+    <p>Die Ursprünge des Motorrads reichen zurück bis ins Jahr <strong>1885</strong>, als <strong>Gottlieb Daimler</strong> und <strong>Wilhelm Maybach</strong> in Deutschland den ersten motorisierten Zweirad-Prototypen entwickelten – den sogenannten <em>„Reitwagen“</em>.</p>
+    <p>In den darauffolgenden Jahrzehnten entwickelten sich Motorräder vom praktischen Fortbewegungsmittel hin zu Symbolen von <strong>Freiheit, Rebellion und Abenteuer</strong>. Marken wie <strong>Harley-Davidson</strong> und <strong>Indian</strong> dominierten früh den amerikanischen Markt, während <strong>BMW</strong>, <strong>Honda</strong> und <strong>Kawasaki</strong> später den globalen Markt eroberten.</p>
+    <p>Heute gibt es Motorräder in unzähligen Variationen: vom klassischen <strong>Chopper</strong> über sportliche <strong>Rennmaschinen</strong> bis hin zu umweltfreundlichen <strong>Elektrobikes</strong>. Sie verkörpern nicht nur Mobilität, sondern auch Lifestyle, Technik und Leidenschaft.</p>
+    <p style="margin-top:20px;"><em>„Zwei Räder bewegen den Körper, aber ein Motorrad bewegt die Seele.“</em></p>
+  </div>
+
+
+           <section class="subcategory">
+          <h2>Sportbikes</h2>
+          <div class="category-grid">
+            
+            
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Chopper</h2>
+          <div class="category-grid">
+            
+   <!-- <div class="category-item"
+      data-category="Kategorie"
+      data-price="Preis"
+      data-speed="Höchstgeschwindigkeit"
+      data-weight="Wert"
+      data-acceleration="Beswchleunigung 0-100"
+      onclick="openPopup(this)">
+        <img src="bild" alt="Shitzu Hakuchou Drag" />
+        <p>
+          <strong>Bike Name</strong><br />
+         Kurzbeschreibung.<br />
+          <strong>Preis:</strong> Preis 
+        </p>
+    </div> -->
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Elektro</h2>
+          <div class="category-grid">
+            
+    
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Klassiker</h2>
+          <div class="category-grid">
+            
+    
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Roller</h2>
+          <div class="category-grid">
+            
+    
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Quads</h2>
+          <div class="category-grid">
+            
+    
+    
+          </div>
+        </section>
+        
+        <section class="subcategory">
+          <h2>Offroad</h2>
+          <div class="category-grid">
+            
+    
+    
+    
+    
+          </div>
+        </section>
+  <!-- Kategorien-Abschnitte (Sportbikes, Chopper, usw.) -->
+  <!-- Alles so belassen wie du es hattest – bereits sauber und strukturiert 👍 -->
+  <!-- ... Kategorie-Abschnitte hier ... (Sportbikes, Chopper, etc.) -->
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <img id="popupImg" src="" alt="Fahrzeugbild" />
+    <h2 id="popupTitle"></h2>
+    <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
+    <p id="popupDesc"></p>
+    <p><strong id="popupPrice"></strong></p>
+    <div id="popupSpecs" style="margin-top: 15px; text-align: left;">
+      <h3 style="color:#ff9800;">Technische Daten</h3>
+      <ul style="list-style: none; padding-left: 0;">
+        <li><strong>Höchstgeschwindigkeit:</strong> <span id="specSpeed"></span></li>
+        <li><strong>Beschleunigung:</strong> <span id="specAcceleration"></span></li>
+        <li><strong>Gewicht:</strong> <span id="specWeight"></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Impressum</strong></p>
+    <p>Alessio Ferro<br>
+    213<br>
+    Los Santos<br>
+    Telefon: 914<br>
+    E-Mail: alessio.ferro@cloud.org</p>
+  </footer>
+
+  <!-- Skript -->
+  <script src="script.js"></script>
+</body>
+</html>

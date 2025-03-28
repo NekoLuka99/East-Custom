@@ -1,0 +1,225 @@
+/* === Allgemein === */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  text-align: center;
+  background-image: url('img/hintergrund.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  padding-top: 100px; /* Platz für fixierten Header */
+}
+
+/* === Fixierter Header mit Shrink-Effekt === */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 20px 0;
+  text-align: center;
+  border-bottom: 2px solid #ff9800;
+  z-index: 999;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+header.shrink {
+  padding: 10px 0;
+}
+
+header h1 {
+  margin: 0;
+  color: #ff9800;
+  font-size: 32px;
+  transition: font-size 0.3s ease;
+}
+
+header.shrink h1 {
+  font-size: 24px;
+}
+
+/* === Filterleiste === */
+.filters {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.filters input,
+.filters select,
+.filters button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: rgba(40, 40, 40, 0.9);
+  color: #fff;
+}
+
+.filters button {
+  background-color: #ff9800;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+/* === Motorrad-Story Box === */
+#motorradStory {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === Kategorie-Gitter === */
+.subcategory {
+  margin: 40px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  display: none;
+}
+
+.subcategory h2 {
+  text-align: left;
+  border-bottom: 1px solid #ff9800;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.category-item {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  height: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.category-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
+}
+
+.category-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.category-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #ddd;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.category-item p strong:last-of-type {
+  color: #00e676;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+/* === Popup-Fenster === */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.popup-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.popup-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ff9800;
+}
+
+/* === Footer / Impressum === */
+footer {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  color: #ddd;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  border-top: 1px solid #444;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px 10px 0 0;
+  max-width: 800px;
+  margin: 40px auto 0;
+}
+
+/* === Mobile Optimierung === */
+@media screen and (max-width: 600px) {
+  .category-item {
+    width: 100%;
+    height: auto;
+  }
+}
+/* === Pop-up Optimierung === */
+.popup-overlay {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+  display: flex;
+  opacity: 1;
+}
