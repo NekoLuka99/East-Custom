@@ -2,7 +2,7 @@ const kaufbareFahrzeuge = [
   {
     name: "Weeny Issi Classic",
     price: 9800,
-    category: "sport", // WICHTIG: exakt wie im ID (klein geschrieben)
+    category: "sport",
     image: "https://static.wikia.nocookie.net/gtawiki/images/7/7a/IssiClassic-GTAO-front.png",
     speed: "210 km/h",
     weight: "1200 kg",
@@ -14,7 +14,7 @@ const bestellbareFahrzeuge = [
   {
     name: "Weeny Issi Classic",
     price: 9800,
-    category: "kompaktwagen", // WICHTIG: exakt wie im ID (klein geschrieben)
+    category: "kompaktwagen",
     image: "https://static.wikia.nocookie.net/gtawiki/images/7/7a/IssiClassic-GTAO-front.png",
     speed: "210 km/h",
     weight: "1200 kg",
@@ -23,20 +23,16 @@ const bestellbareFahrzeuge = [
 ];
 
 function switchTab(tabId) {
-  // Alle Inhalte verstecken
   document.querySelectorAll('.tab-content').forEach(section => {
     section.classList.remove('active');
   });
 
-  // Den aktiven Bereich zeigen
   document.getElementById(tabId).classList.add('active');
 
-  // Alle Buttons deaktivieren
   document.querySelectorAll('.tabs button').forEach(btn => {
     btn.classList.remove('active');
   });
 
-  // Aktiven Button markieren
   const activeBtn = Array.from(document.querySelectorAll('.tabs button')).find(btn =>
     btn.getAttribute('onclick')?.includes(tabId)
   );
@@ -57,13 +53,13 @@ function renderFahrzeuge(fahrzeugeArray, targetGridId) {
     div.setAttribute("data-category", vehicle.category);
     div.onclick = () => openPopup(div);
 
-    div.innerHTML = \`
-      <img src="\${vehicle.image}" loading="lazy" />
+    div.innerHTML = `
+      <img src="${vehicle.image}" loading="lazy" />
       <p>
-        <strong>\${vehicle.name}</strong><br />
-        <strong>Preis:</strong> \${vehicle.price}$
+        <strong>${vehicle.name}</strong><br />
+        <strong>Preis:</strong> ${vehicle.price}$
       </p>
-    \`;
+    `;
     grid.appendChild(div);
   });
 }
@@ -86,7 +82,6 @@ function closePopup() {
 window.addEventListener("load", () => {
   renderBestellfahrzeuge();
   renderFahrzeuge(kaufbareFahrzeuge, "grid-kaufbar");
-  renderFahrzeuge(bestellbareFahrzeuge, "grid-bestellbar");
   switchTab("kaufbar");
 });
 
@@ -123,11 +118,11 @@ function renderBestellfahrzeuge() {
         div.setAttribute("data-category", vehicle.category);
         div.onclick = () => openPopup(div);
 
-        div.innerHTML = \`
-          <img src="\${vehicle.image}" loading="lazy" />
-          <p><strong>\${vehicle.name}</strong><br />
-          <strong>Preis:</strong> \${vehicle.price}$</p>
-        \`;
+        div.innerHTML = `
+          <img src="${vehicle.image}" loading="lazy" />
+          <p><strong>${vehicle.name}</strong><br />
+          <strong>Preis:</strong> ${vehicle.price}$</p>
+        `;
         grid.appendChild(div);
       });
     }
