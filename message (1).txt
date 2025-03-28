@@ -45,7 +45,7 @@
       margin: 40px auto;
       max-width: 1200px;
       padding: 0 20px;
-      display: block;
+      display: none;
     }
     .subcategory h2 {
       text-align: left;
@@ -388,7 +388,7 @@
         <script>
           function searchVehicles() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const selectedCategory = document.getElementById('categoryFilter').value;
+            const selectedCategory = document.getElementById('categoryFilter').value | 'all';
             const allSections = document.querySelectorAll('.subcategory');
       
             allSections.forEach(section => {
