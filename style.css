@@ -31,25 +31,49 @@ header h1 {
   color: #ff9800;
 }
 
+/* Stil für Login-Bereich auf der rechten Seite, untereinander angeordnet */
 .login-area {
-  margin-top: 10px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
 }
 
 .login-area input {
-  padding: 5px;
-  margin: 0 5px;
+  padding: 8px;
+  margin: 5px 0;
+  width: 200px;
   border-radius: 5px;
-  border: none;
+  border: 1px solid #444;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
 }
 
 .login-area button {
-  padding: 5px 10px;
+  margin-top: 10px;
+  padding: 8px 16px;
   background-color: #ff9800;
   border: none;
   border-radius: 5px;
   color: #111;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
+
+.login-area button:hover {
+  background-color: #ffa733;
+}
+
 
 .tabs {
   margin-top: 10px;
