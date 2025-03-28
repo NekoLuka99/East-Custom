@@ -8,41 +8,12 @@
 </head>
 <body>
   <header>
-    <h1>🏍️ East-Bikes 🏍️</h1>
-  </header>
-
-  <div class="filters">
-    <input type="text" id="searchInput" placeholder="Fahrzeug suchen..." onkeyup="searchVehicles()" />
-    <select id="categoryFilter" onchange="searchVehicles()">
-      <option value="" disabled selected hidden>Bitte wählen</option>
-      <option value="all">Alle Kategorien</option>
-      <option value="sportbikes">Sportbikes</option>
-      <option value="chopper">Chopper</option>
-      <option value="offroad">Offroad</option>
-      <option value="elektro">Elektro</option>
-      <option value="klassiker">Klassiker</option>
-      <option value="roller">Roller</option>
-      <option value="quads">Quads</option>
-    </select>   
-    <button onclick="resetFilters()">🔄 Zurücksetzen</button>
-  </div>
-
-  <div id="motorradStory">
-    <h2 style="color:#ff9800;"><strong>SPACEHOLDER</strong></h2>    
-  </div>
-
-
-           <section class="subcategory">
-          <h2>Sportbikes</h2>
-          <div class="category-grid">
-            
-            
-          </div>
-        </section>
-        
-        <section class="subcategory">
-          <h2>Chopper</h2>
-          <div class="category-grid">
+    <h1>LS-Automobile</h1>
+    <nav class="tabs">
+    <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
+    <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
+  </nav>
+</header>
             
    <!-- <div class="category-item"
       data-category="Kategorie"
@@ -59,55 +30,7 @@
         </p>
     </div> -->
     
-          </div>
-        </section>
-        
-        <section class="subcategory">
-          <h2>Elektro</h2>
-          <div class="category-grid">
-            
-    
-    
-          </div>
-        </section>
-        
-        <section class="subcategory">
-          <h2>Klassiker</h2>
-          <div class="category-grid">
-            
-    
-    
-          </div>
-        </section>
-        
-        <section class="subcategory">
-          <h2>Roller</h2>
-          <div class="category-grid">
-            
-    
-    
-          </div>
-        </section>
-        
-        <section class="subcategory">
-          <h2>Quads</h2>
-          <div class="category-grid">
-            
-    
-    
-          </div>
-        </section>
-        
-        <section class="subcategory">
-          <h2>Offroad</h2>
-          <div class="category-grid">
-            
-    
-    
-    
-    
-          </div>
-        </section>
+          
   <!-- Kategorien-Abschnitte (Sportbikes, Chopper, usw.) -->
   <!-- Alles so belassen wie du es hattest – bereits sauber und strukturiert 👍 -->
   <!-- ... Kategorie-Abschnitte hier ... (Sportbikes, Chopper, etc.) -->
