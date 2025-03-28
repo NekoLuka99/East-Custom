@@ -149,3 +149,8 @@ header h1 {
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* NEU: Button standardmäßig verstecken */
+#addBtn {
+  display: none;
+}
