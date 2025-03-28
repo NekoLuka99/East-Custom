@@ -1,24 +1,24 @@
 const kaufbareFahrzeuge = [
   {
-    name: "Pegassi Bati 801",
-    price: 15000,
-    category: "sportbike",
-    image: "https://static.wikia.nocookie.net/gtawiki/images/d/d9/Bati801-GTAV-front.png/revision/latest?cb=20160127211358",
-    speed: "320 km/h",
-    weight: "210 kg",
-    acceleration: "2.8 s"
+    name: "Weeny Issi Classic",
+    price: 9800,
+    category: "sport", // WICHTIG: exakt wie im ID (klein geschrieben)
+    image: "https://static.wikia.nocookie.net/gtawiki/images/7/7a/IssiClassic-GTAO-front.png",
+    speed: "210 km/h",
+    weight: "1200 kg",
+    acceleration: "5.6 s"
   }
 ];
 
 const bestellbareFahrzeuge = [
   {
-    name: "Western Zombie Chopper",
-    price: 13500,
-    category: "chopper",
-    image: "https://static.wikia.nocookie.net/gtawiki/images/6/64/Hexer-GTAV-front.png/revision/latest?cb=20160211212015",
-    speed: "290 km/h",
-    weight: "250 kg",
-    acceleration: "3.2 s"
+    name: "Weeny Issi Classic",
+    price: 9800,
+    category: "kompaktwagen", // WICHTIG: exakt wie im ID (klein geschrieben)
+    image: "https://static.wikia.nocookie.net/gtawiki/images/7/7a/IssiClassic-GTAO-front.png",
+    speed: "210 km/h",
+    weight: "1200 kg",
+    acceleration: "5.6 s"
   }
 ];
 
