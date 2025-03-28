@@ -1,5 +1,5 @@
 const kaufbareFahrzeuge = [];
-renderFahrzeuge?.(bestellbareFahrzeuge, "grid-bestellbar");
+const bestellbareFahrzeuge = [];
 
 function switchTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(section => {
