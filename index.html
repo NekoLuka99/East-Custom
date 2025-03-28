@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <h1>LS-Automobile</h1>
+    <h1 onclick="switchTab('startseite')" style="cursor: pointer;">LS-Automobile</h1>
     <div class="login-area">
       <input type="text" id="loginUser" placeholder="Benutzername">
       <input type="password" id="loginPass" placeholder="Passwort">
@@ -20,6 +20,19 @@
     </nav>
   </header>
 
+  <section id="startseite" class="tab-content active">
+  <div class="startseite-box">
+    <h2>Willkommen bei LS-Automobile</h2>
+    <p>
+      Wir sind dein Ansprechpartner für den Kauf und die Bestellung von hochwertigen Fahrzeugen in Los Santos. 
+      Unser Ziel ist es, dir den besten Service und die schnellste Lieferung im gesamten Bundesstaat zu bieten.
+    </p>
+    <p>
+      Egal ob Sportwagen, Klassiker oder Alltagsfahrzeug – bei uns findest du alles, was dein Herz begehrt.
+    </p>
+  </div>
+</section>
+  
   <section id="kaufbar" class="tab-content active">
     <button class="add-btn" id="addBtn" onclick="openAddForm()">+ Fahrzeug hinzufügen</button>
     <div class="category-grid" id="grid-kaufbar"></div>
@@ -28,8 +41,6 @@
   <section id="bestellbar" class="tab-content">
     <p style="text-align:center;">Hier erscheinen später bestellbare Fahrzeuge.</p>
   </section>
-
-  <div class="startseite-box">Spaceholder</div>
   
   <div id="addForm" class="popup-overlay">
     <div class="popup-content">
