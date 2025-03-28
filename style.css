@@ -34,119 +34,55 @@ header.shrink {
 
 header h1 {
   margin: 0;
-  color: #ff9800;
   font-size: 32px;
-  transition: font-size 0.3s ease;
+  color: #ff9800;
 }
+
+/* === Navigations-Tabs unter dem Titel === */
+.tabs {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tabs button {
+  background-color: transparent;
+  border: 1px solid #ff9800;
+  color: #ff9800;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.tabs button:hover,
+.tabs button.active {
+  background-color: #ff9800;
+  color: #111;
+}
+
+/* === Inhalt der Tabs === */
+.tab-content {
+  display: none;
+  padding: 20px;
+  margin-top: 140px; /* Platz wegen fixiertem Header */
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tab-content.active {
+  display: block;
+}
+
 
 header.shrink h1 {
   font-size: 24px;
 }
 
-/* === Filterleiste === */
-.filters {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.filters input,
-.filters select,
-.filters button {
-  padding: 10px;
-  font-size: 16px;
-  margin: 5px;
-  border-radius: 5px;
-  border: 1px solid #444;
-  background-color: rgba(40, 40, 40, 0.9);
-  color: #fff;
-}
-
-.filters button {
-  background-color: #ff9800;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-}
-
-/* === Motorrad-Story Box === */
-#motorradStory {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(12px);
-  border-radius: 10px;
-  font-size: 16px;
-  line-height: 1.6;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* === Kategorie-Gitter === */
-.subcategory {
-  margin: 40px auto;
-  max-width: 1200px;
-  padding: 0 20px;
-  display: none;
-}
-
-.subcategory h2 {
-  text-align: left;
-  border-bottom: 1px solid #ff9800;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
-.category-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.category-item {
-  background-color: #2a2a2a;
-  border-radius: 10px;
-  padding: 15px;
-  width: 250px;
-  height: 400px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-.category-item:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
-}
-
-.category-item img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.category-item p {
-  margin: 0;
-  font-size: 14px;
-  color: #ddd;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.category-item p strong:last-of-type {
-  color: #00e676;
-  font-size: 15px;
-  margin-top: 5px;
-}
 
 /* === Popup-Fenster === */
 .popup-overlay {
