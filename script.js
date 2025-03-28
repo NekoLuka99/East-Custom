@@ -1,4 +1,5 @@
 const kaufbareFahrzeuge = [];
+renderFahrzeuge?.(bestellbareFahrzeuge, "grid-bestellbar");
 
 function switchTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(section => {
@@ -110,4 +111,12 @@ function addNewVehicle() {
   renderFahrzeuge();
   closeAddForm();
 }
+
+function applyLoginUI() {
+  document.querySelector(".login-area").style.display = "none";
+  document.getElementById("mainTabs").style.display = "flex";
+  document.getElementById("addBtn").style.display = "inline-block";
+  document.getElementById("logoutBtn").style.display = "inline-block";
+}
+
 
