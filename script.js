@@ -75,7 +75,52 @@ function closePopup() {
 }
 
 window.addEventListener("load", () => {
+  renderBestellfahrzeuge();
   renderFahrzeuge(kaufbareFahrzeuge, "grid-kaufbar");
   renderFahrzeuge(bestellbareFahrzeuge, "grid-bestellbar");
   switchTab("kaufbar");
 });
+
+function renderBestellfahrzeuge() {
+  const kategorien = {
+    kompaktwagen: "grid-bestell-kompaktwagen",
+    vans: "grid-bestell-vans",
+    coupes: "grid-bestell-coupes",
+    muscle: "grid-bestell-muscle",
+    offroad: "grid-bestell-offroad",
+    suv: "grid-bestell-suv",
+    sedans: "grid-bestell-sedans",
+    sport: "grid-bestell-sport",
+    classicsport: "grid-bestell-classicsport",
+    supersport: "grid-bestell-supersport"
+  };
+
+  Object.keys(kategorien).forEach(kategorie => {
+    const grid = document.getElementById(kategorien[kategorie]);
+    grid.innerHTML = "";
+
+    const gefilterte = bestellbareFahrzeuge.filter(f => f.category === kategorie);
+
+    if (gefilterte.length === 0) {
+      grid.innerHTML = "<p style='color:#888;'>Keine Fahrzeuge verfügbar</p>";
+    } else {
+      gefilterte.forEach(vehicle => {
+        const div = document.createElement("div");
+        div.className = "category-item";
+        div.setAttribute("data-price", vehicle.price);
+        div.setAttribute("data-speed", vehicle.speed);
+        div.setAttribute("data-weight", vehicle.weight);
+        div.setAttribute("data-acceleration", vehicle.acceleration);
+        div.setAttribute("data-category", vehicle.category);
+        div.onclick = () => openPopup(div);
+
+        div.innerHTML = \`
+          <img src="\${vehicle.image}" loading="lazy" />
+          <p><strong>\${vehicle.name}</strong><br />
+          <strong>Preis:</strong> \${vehicle.price}$</p>
+        \`;
+        grid.appendChild(div);
+      });
+    }
+  });
+}
