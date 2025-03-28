@@ -29,6 +29,21 @@ function login() {
     alert("Zugang verweigert");
   }
 }
+window.addEventListener("load", () => {
+  if (localStorage.getItem("loggedInUser") === "BobbyNash") {
+    applyLoginUI();
+    document.getElementById("logoutBtn").style.display = "inline-block";
+  }
+  renderBestellfahrzeuge?.();
+  renderFahrzeuge?.(kaufbareFahrzeuge, "grid-kaufbar");
+  renderFahrzeuge?.(bestellbareFahrzeuge, "grid-bestellbar");
+  switchTab("startseite");
+});
+
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  location.reload(); // Seite neu laden, um UI zurückzusetzen
+}
 
 function renderFahrzeuge() {
   const grid = document.getElementById("grid-kaufbar");
@@ -95,3 +110,4 @@ function addNewVehicle() {
   renderFahrzeuge();
   closeAddForm();
 }
+
