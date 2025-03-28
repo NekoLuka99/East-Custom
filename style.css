@@ -136,7 +136,8 @@ header h1 {
 /* Popup-Overlay bleibt wie es ist */
 
 .popup-content {
-  background: rgba(30, 30, 30, 0.95);
+  background: rgba(30, 30, 30, 0.85); /* leichte Transparenz */
+  backdrop-filter: blur(10px);        /* Weichzeichner für Glass-Effect */
   padding: 30px;
   border-radius: 12px;
   width: 90%;
@@ -145,7 +146,6 @@ header h1 {
   position: relative;
   box-shadow: 0 0 25px rgba(0,0,0,0.5);
   border: 1px solid rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
 }
 
 .popup-content h2 {
