@@ -21,8 +21,8 @@ function login() {
   const pass = document.getElementById("loginPass").value;
   if (user === "BobbyNash" && pass === "admin") {
     document.querySelector(".login-area").style.display = "none";
-    document.getElementById("addBtn").style.display = "inline-block"; // Zeige Button
-    alert("Erfolgreich eingeloggt!");
+    document.getElementById("mainTabs").style.display = "flex";
+    switchTab("kaufbar");
   } else {
     alert("Zugang verweigert");
   }
