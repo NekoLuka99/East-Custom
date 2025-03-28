@@ -10,6 +10,7 @@ body {
   background-attachment: fixed;
   color: #fff;
   padding-top: 100px; /* Platz für fixierten Header */
+} 
 
 header {
   text-align: center;
