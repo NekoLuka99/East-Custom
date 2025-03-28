@@ -1,32 +1,9 @@
-const kaufbareFahrzeuge = [
-  {
-    name: "Weeny Issi Classic",
-    price: 9800,
-    category: "sport",
-    image: "https://static.wikia.nocookie.net/gtawiki/images/7/7a/IssiClassic-GTAO-front.png",
-    speed: "210 km/h",
-    weight: "1200 kg",
-    acceleration: "5.6 s"
-  }
-];
-
-const bestellbareFahrzeuge = [
-  {
-    name: "Weeny Issi Classic",
-    price: 9800,
-    category: "kompaktwagen",
-    image: "https://static.wikia.nocookie.net/gtawiki/images/7/7a/IssiClassic-GTAO-front.png",
-    speed: "210 km/h",
-    weight: "1200 kg",
-    acceleration: "5.6 s"
-  }
-];
+const kaufbareFahrzeuge = [];
 
 function switchTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(section => {
     section.classList.remove('active');
   });
-
   document.getElementById(tabId).classList.add('active');
 
   document.querySelectorAll('.tabs button').forEach(btn => {
@@ -39,11 +16,22 @@ function switchTab(tabId) {
   if (activeBtn) activeBtn.classList.add('active');
 }
 
-function renderFahrzeuge(fahrzeugeArray, targetGridId) {
-  const grid = document.getElementById(targetGridId);
-  grid.innerHTML = "";
+function login() {
+  const user = document.getElementById("loginUser").value;
+  const pass = document.getElementById("loginPass").value;
+  if (user === "BobbyNash" && pass === "admin") {
+    document.querySelector(".login-area").style.display = "none";
+    document.getElementById("mainTabs").style.display = "flex";
+    switchTab("kaufbar");
+  } else {
+    alert("Zugang verweigert");
+  }
+}
 
-  fahrzeugeArray.forEach(vehicle => {
+function renderFahrzeuge() {
+  const grid = document.getElementById("grid-kaufbar");
+  grid.innerHTML = "";
+  kaufbareFahrzeuge.forEach(vehicle => {
     const div = document.createElement("div");
     div.className = "category-item";
     div.setAttribute("data-price", vehicle.price);
@@ -52,13 +40,9 @@ function renderFahrzeuge(fahrzeugeArray, targetGridId) {
     div.setAttribute("data-acceleration", vehicle.acceleration);
     div.setAttribute("data-category", vehicle.category);
     div.onclick = () => openPopup(div);
-
     div.innerHTML = `
       <img src="${vehicle.image}" loading="lazy" />
-      <p>
-        <strong>${vehicle.name}</strong><br />
-        <strong>Preis:</strong> ${vehicle.price}$
-      </p>
+      <p><strong>${vehicle.name}</strong><br />Preis: ${vehicle.price}$</p>
     `;
     grid.appendChild(div);
   });
@@ -79,52 +63,33 @@ function closePopup() {
   document.getElementById('popup').classList.remove('active');
 }
 
-window.addEventListener("load", () => {
-  renderBestellfahrzeuge();
-  renderFahrzeuge(kaufbareFahrzeuge, "grid-kaufbar");
-  switchTab("kaufbar");
-});
+function openAddForm() {
+  document.getElementById('addForm').classList.add('active');
+}
 
-function renderBestellfahrzeuge() {
-  const kategorien = {
-    kompaktwagen: "grid-bestell-kompaktwagen",
-    vans: "grid-bestell-vans",
-    coupes: "grid-bestell-coupes",
-    muscle: "grid-bestell-muscle",
-    offroad: "grid-bestell-offroad",
-    suv: "grid-bestell-suv",
-    sedans: "grid-bestell-sedans",
-    sport: "grid-bestell-sport",
-    classicsport: "grid-bestell-classicsport",
-    supersport: "grid-bestell-supersport"
+function closeAddForm() {
+  document.getElementById('addForm').classList.remove('active');
+}
+
+function addNewVehicle() {
+  const name = document.getElementById('nameInput').value;
+  const price = parseInt(document.getElementById('priceInput').value);
+  const image = document.getElementById('imageInput').value;
+  const speed = document.getElementById('speedInput').value;
+  const acceleration = document.getElementById('accelerationInput').value;
+  const weight = document.getElementById('weightInput').value;
+
+  const newVehicle = {
+    name,
+    price,
+    category: document.getElementById("categoryInput").value,
+    image,
+    speed,
+    weight,
+    acceleration
   };
 
-  Object.keys(kategorien).forEach(kategorie => {
-    const grid = document.getElementById(kategorien[kategorie]);
-    grid.innerHTML = "";
-
-    const gefilterte = bestellbareFahrzeuge.filter(f => f.category === kategorie);
-
-    if (gefilterte.length === 0) {
-      grid.innerHTML = "<p style='color:#888;'>Keine Fahrzeuge verfügbar</p>";
-    } else {
-      gefilterte.forEach(vehicle => {
-        const div = document.createElement("div");
-        div.className = "category-item";
-        div.setAttribute("data-price", vehicle.price);
-        div.setAttribute("data-speed", vehicle.speed);
-        div.setAttribute("data-weight", vehicle.weight);
-        div.setAttribute("data-acceleration", vehicle.acceleration);
-        div.setAttribute("data-category", vehicle.category);
-        div.onclick = () => openPopup(div);
-
-        div.innerHTML = `
-          <img src="${vehicle.image}" loading="lazy" />
-          <p><strong>${vehicle.name}</strong><br />
-          <strong>Preis:</strong> ${vehicle.price}$</p>
-        `;
-        grid.appendChild(div);
-      });
-    }
-  });
+  kaufbareFahrzeuge.push(newVehicle);
+  renderFahrzeuge();
+  closeAddForm();
 }
