@@ -74,7 +74,6 @@ header h1 {
   background-color: #ffa733;
 }
 
-
 .tabs {
   margin-top: 10px;
   display: flex;
@@ -183,3 +182,18 @@ header h1 {
   display: none;
 }
 
+/* === Startseite === */
+.startseite-box {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 18px;
+  line-height: 1.6;
+  color: #fff;
+  text-align: center;
+}
