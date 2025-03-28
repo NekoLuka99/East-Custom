@@ -3,70 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>East-Bikes</title>
+  <title>East-Bikes Tabs</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>LS-Automobile</h1>
+    <h1>🏍️ East-Bikes 🏍️</h1>
     <nav class="tabs">
-    <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
-    <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
-  </nav>
-</header>
-            
-   <!-- <div class="category-item"
-      data-category="Kategorie"
-      data-price="Preis"
-      data-speed="Höchstgeschwindigkeit"
-      data-weight="Wert"
-      data-acceleration="Beswchleunigung 0-100"
-      onclick="openPopup(this)">
-        <img src="bild" alt="Shitzu Hakuchou Drag" />
-        <p>
-          <strong>Bike Name</strong><br />
-         Kurzbeschreibung.<br />
-          <strong>Preis:</strong> Preis 
-        </p>
-    </div> -->
-    
-          
-  <!-- Kategorien-Abschnitte (Sportbikes, Chopper, usw.) -->
-  <!-- Alles so belassen wie du es hattest – bereits sauber und strukturiert 👍 -->
-  <!-- ... Kategorie-Abschnitte hier ... (Sportbikes, Chopper, etc.) -->
+      <button onclick="switchTab('kaufbar')" class="active">Kaufbare Fahrzeuge</button>
+      <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
+    </nav>
+  </header>
 
-  <!-- Popup -->
+  <section id="kaufbar" class="tab-content active">
+    <div class="category-grid" id="grid-kaufbar"></div>
+  </section>
+
+  <section id="bestellbar" class="tab-content">
+    <div class="category-grid" id="grid-bestellbar"></div>
+  </section>
+
   <div class="popup-overlay" id="popup">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePopup()">&times;</span>
-    <img id="popupImg" src="" alt="Fahrzeugbild" />
-    <h2 id="popupTitle"></h2>
-    <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
-    <p id="popupDesc"></p>
-    <p><strong id="popupPrice"></strong></p>
-    <div id="popupSpecs" style="margin-top: 15px; text-align: left;">
-      <h3 style="color:#ff9800;">Technische Daten</h3>
-      <ul style="list-style: none; padding-left: 0;">
-        <li><strong>Höchstgeschwindigkeit:</strong> <span id="specSpeed"></span></li>
-        <li><strong>Beschleunigung:</strong> <span id="specAcceleration"></span></li>
-        <li><strong>Gewicht:</strong> <span id="specWeight"></span></li>
-      </ul>
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <img id="popupImg" src="" alt="Fahrzeugbild" />
+      <h2 id="popupTitle"></h2>
+      <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
+      <p><strong id="popupPrice"></strong></p>
+      <div id="popupSpecs" style="margin-top: 15px; text-align: left;">
+        <h3 style="color:#ff9800;">Technische Daten</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li><strong>Höchstgeschwindigkeit:</strong> <span id="specSpeed"></span></li>
+          <li><strong>Beschleunigung:</strong> <span id="specAcceleration"></span></li>
+          <li><strong>Gewicht:</strong> <span id="specWeight"></span></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-
-  <!-- Footer -->
-  <footer>
-    <p><strong>Impressum</strong></p>
-    <p>Alessio Ferro<br>
-    213<br>
-    Los Santos<br>
-    Telefon: 914<br>
-    E-Mail: alessio.ferro@cloud.org</p>
-  </footer>
-
-  <!-- Skript -->
   <script src="script.js"></script>
 </body>
 </html>
