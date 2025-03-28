@@ -21,7 +21,7 @@ function login() {
   const pass = document.getElementById("loginPass").value;
   if (user === "BobbyNash" && pass === "admin") {
     document.querySelector(".login-area").style.display = "none";
-    document.getElementById("mainTabs").sFtyle.display = "flex";
+    document.getElementById("mainTabs").style.display = "flex";
     document.getElementById("addBtn").style.display = "inline-block";
     switchTab("kaufbar");
   } else {
