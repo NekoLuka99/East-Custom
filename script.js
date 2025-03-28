@@ -20,6 +20,7 @@ function login() {
   const user = document.getElementById("loginUser").value;
   const pass = document.getElementById("loginPass").value;
   if (user === "BobbyNash" && pass === "admin") {
+    localStorage.setItem("loggedInUser", user); // speichern
     document.querySelector(".login-area").style.display = "none";
     document.getElementById("mainTabs").style.display = "flex";
     document.getElementById("addBtn").style.display = "inline-block";
