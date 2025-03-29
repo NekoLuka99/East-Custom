@@ -1,6 +1,25 @@
-const kaufbareFahrzeuge = [];
-const bestellbareFahrzeuge = [];
+// Neue script.js mit Firebase-Unterstützung
 
+// Firebase einbinden und initialisieren
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyByFfqbOOAf4nTWlzMmC9jqJHpgdBipwHQ",
+  authDomain: "ls-automobile.firebaseapp.com",
+  databaseURL: "https://ls-automobile-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "ls-automobile",
+  storageBucket: "ls-automobile.firebasestorage.app",
+  messagingSenderId: "1058858305130",
+  appId: "1:1058858305130:web:7a22c1db60d39b247dac13",
+  measurementId: "G-YFBF8NTHF3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const fahrzeugeRef = ref(db, "kaufbareFahrzeuge");
+
+// UI-Handling
 function switchTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(section => {
     section.classList.remove('active');
@@ -34,10 +53,19 @@ function logout() {
   location.reload();
 }
 
-function renderFahrzeuge() {
+function applyLoginUI() {
+  document.querySelector(".login-area").style.display = "none";
+  document.getElementById("mainTabs").style.display = "flex";
+  document.getElementById("addBtn").style.display = "inline-block";
+  document.getElementById("logoutBtn").style.display = "inline-block";
+}
+
+// Fahrzeug rendern
+function renderFahrzeuge(liste) {
   const grid = document.getElementById("grid-kaufbar");
   grid.innerHTML = "";
-  kaufbareFahrzeuge.forEach((vehicle, index) => {
+
+  for (const [id, vehicle] of Object.entries(liste)) {
     const div = document.createElement("div");
     div.className = "category-item";
     div.setAttribute("data-price", vehicle.price);
@@ -46,6 +74,7 @@ function renderFahrzeuge() {
     div.setAttribute("data-acceleration", vehicle.acceleration);
     div.setAttribute("data-category", vehicle.category);
     div.onclick = () => openPopup(div);
+
     div.innerHTML = `
       <img src="${vehicle.image}" loading="lazy" />
       <p><strong>${vehicle.name}</strong><br />Preis: ${vehicle.price}$</p>
@@ -57,14 +86,13 @@ function renderFahrzeuge() {
       deleteBtn.className = "delete-btn";
       deleteBtn.onclick = (e) => {
         e.stopPropagation();
-        kaufbareFahrzeuge.splice(index, 1);
-        renderFahrzeuge();
+        remove(ref(db, `kaufbareFahrzeuge/${id}`));
       };
       div.appendChild(deleteBtn);
     }
 
     grid.appendChild(div);
-  });
+  }
 }
 
 function openPopup(element) {
@@ -91,41 +119,31 @@ function closeAddForm() {
 }
 
 function addNewVehicle() {
-  const name = document.getElementById('nameInput').value;
-  const price = parseInt(document.getElementById('priceInput').value);
-  const image = document.getElementById('imageInput').value;
-  const speed = document.getElementById('speedInput').value;
-  const acceleration = document.getElementById('accelerationInput').value;
-  const weight = document.getElementById('weightInput').value;
-
   const newVehicle = {
-    name,
-    price,
+    name: document.getElementById('nameInput').value,
+    price: parseInt(document.getElementById('priceInput').value),
     category: document.getElementById("categoryInput").value,
-    image,
-    speed,
-    weight,
-    acceleration
+    image: document.getElementById('imageInput').value,
+    speed: document.getElementById('speedInput').value,
+    weight: document.getElementById('weightInput').value,
+    acceleration: document.getElementById('accelerationInput').value
   };
 
-  kaufbareFahrzeuge.push(newVehicle);
-  renderFahrzeuge();
-  closeAddForm();
+  push(fahrzeugeRef, newVehicle).then(() => {
+    closeAddForm();
+  });
 }
 
-function applyLoginUI() {
-  document.querySelector(".login-area").style.display = "none";
-  document.getElementById("mainTabs").style.display = "flex";
-  document.getElementById("addBtn").style.display = "inline-block";
-  document.getElementById("logoutBtn").style.display = "inline-block";
-}
-
+// Seite laden
 window.addEventListener("load", () => {
   if (localStorage.getItem("loggedInUser") === "BobbyNash") {
     applyLoginUI();
   }
-  renderBestellfahrzeuge?.();
-  renderFahrzeuge?.();
-  renderFahrzeuge?.(bestellbareFahrzeuge, "grid-bestellbar");
+
+  onValue(fahrzeugeRef, snapshot => {
+    const data = snapshot.val() || {};
+    renderFahrzeuge(data);
+  });
+
   switchTab("startseite");
 });
