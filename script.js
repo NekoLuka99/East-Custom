@@ -65,6 +65,7 @@ import { signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth
 function logout() {
   signOut(auth).then(() => {
     localStorage.removeItem("loggedInUser");
+    document.body.classList.remove("logged-in"); // beim Logout
     location.reload();
   }).catch((error) => {
     alert("Fehler beim Logout: " + error.message);
@@ -72,12 +73,15 @@ function logout() {
 }
 
 
+
 function applyLoginUI() {
   document.querySelector(".login-area").style.display = "none";
   document.getElementById("mainTabs").style.display = "flex";
   document.getElementById("addBtn").style.display = "inline-block";
   document.getElementById("logoutBtn").style.display = "inline-block";
+  document.body.classList.add("logged-in"); // nur beim Login
 }
+
 
 function renderFahrzeuge(data) {
   const grid = document.getElementById("grid-kaufbar");
