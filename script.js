@@ -149,4 +149,3 @@ window.addEventListener("load", () => {
     renderFahrzeuge(data);
   });
 });
-
