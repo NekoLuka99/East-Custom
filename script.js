@@ -1,5 +1,6 @@
 // Neue script.js mit Firebase-Unterstützung
 
+// Firebase einbinden und initialisieren
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 
@@ -8,7 +9,7 @@ const firebaseConfig = {
   authDomain: "ls-automobile.firebaseapp.com",
   databaseURL: "https://ls-automobile-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "ls-automobile",
-  storageBucket: "ls-automobile.appspot.com",
+  storageBucket: "ls-automobile.firebasestorage.app",
   messagingSenderId: "1058858305130",
   appId: "1:1058858305130:web:7a22c1db60d39b247dac13",
   measurementId: "G-YFBF8NTHF3"
@@ -18,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const fahrzeugeRef = ref(db, "kaufbareFahrzeuge");
 
+// UI-Handling
 function switchTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(section => {
     section.classList.remove('active');
@@ -37,7 +39,7 @@ function switchTab(tabId) {
 function login() {
   const user = document.getElementById("loginUser").value;
   const pass = document.getElementById("loginPass").value;
-  if (user === "Chef" && pass === "admin") {
+  if (user === "BobbyNash" && pass === "admin") {
     localStorage.setItem("loggedInUser", user);
     applyLoginUI();
     switchTab("kaufbar");
@@ -45,6 +47,7 @@ function login() {
     alert("Zugang verweigert");
   }
 }
+
 
 function logout() {
   localStorage.removeItem("loggedInUser");
@@ -58,6 +61,7 @@ function applyLoginUI() {
   document.getElementById("logoutBtn").style.display = "inline-block";
 }
 
+// Fahrzeug rendern
 function renderFahrzeuge(liste) {
   const grid = document.getElementById("grid-kaufbar");
   grid.innerHTML = "";
@@ -77,7 +81,7 @@ function renderFahrzeuge(liste) {
       <p><strong>${vehicle.name}</strong><br />Preis: ${vehicle.price}$</p>
     `;
 
-    if (localStorage.getItem("loggedInUser") === "Chef") {
+    if (localStorage.getItem("loggedInUser") === "BobbyNash") {
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "🗑️ Löschen";
       deleteBtn.className = "delete-btn";
@@ -131,8 +135,9 @@ function addNewVehicle() {
   });
 }
 
+// Seite laden
 window.addEventListener("load", () => {
-  if (localStorage.getItem("loggedInUser") === "Chef") {
+  if (localStorage.getItem("loggedInUser") === "BobbyNash") {
     applyLoginUI();
     switchTab("kaufbar");
   } else {
@@ -144,3 +149,4 @@ window.addEventListener("load", () => {
     renderFahrzeuge(data);
   });
 });
+
