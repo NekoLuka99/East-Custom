@@ -10,7 +10,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 import {
   getAuth,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  signOut
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -60,28 +61,23 @@ function login() {
     });
 }
 
-import { signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-
 function logout() {
   signOut(auth).then(() => {
     localStorage.removeItem("loggedInUser");
-    document.body.classList.remove("logged-in"); // beim Logout
+    document.body.classList.remove("logged-in");
     location.reload();
   }).catch((error) => {
     alert("Fehler beim Logout: " + error.message);
   });
 }
 
-
-
 function applyLoginUI() {
   document.querySelector(".login-area").style.display = "none";
   document.getElementById("mainTabs").style.display = "flex";
   document.getElementById("addBtn").style.display = "inline-block";
   document.getElementById("logoutBtn").style.display = "inline-block";
-  document.body.classList.add("logged-in"); // nur beim Login
+  document.body.classList.add("logged-in"); // FIX: Nur add
 }
-
 
 function renderFahrzeuge(data) {
   const grid = document.getElementById("grid-kaufbar");
@@ -170,6 +166,7 @@ window.addEventListener("load", () => {
   });
 });
 
+// Funktionen global verfügbar machen
 window.login = login;
 window.logout = logout;
 window.switchTab = switchTab;
