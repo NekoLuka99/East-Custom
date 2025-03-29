@@ -1,146 +1,106 @@
-// Neue script.js mit Firebase-Unterstützung
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LS-Automobile</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script defer src="script.js"></script>
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+      document.querySelectorAll('.tabs button').forEach(btn => {
+        btn.classList.remove('active');
+      });
 
-const firebaseConfig = {
-  apiKey: "AIzaSyByFfqbOOAf4nTWlzMmC9jqJHpgdBipwHQ",
-  authDomain: "ls-automobile.firebaseapp.com",
-  databaseURL: "https://ls-automobile-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "ls-automobile",
-  storageBucket: "ls-automobile.appspot.com",
-  messagingSenderId: "1058858305130",
-  appId: "1:1058858305130:web:7a22c1db60d39b247dac13",
-  measurementId: "G-YFBF8NTHF3"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const fahrzeugeRef = ref(db, "kaufbareFahrzeuge");
-
-function switchTab(tabId) {
-  document.querySelectorAll('.tab-content').forEach(section => {
-    section.classList.remove('active');
-  });
-  document.getElementById(tabId).classList.add('active');
-
-  document.querySelectorAll('.tabs button').forEach(btn => {
-    btn.classList.remove('active');
-  });
-
-  const activeBtn = Array.from(document.querySelectorAll('.tabs button')).find(btn =>
-    btn.getAttribute('onclick')?.includes(tabId)
-  );
-  if (activeBtn) activeBtn.classList.add('active');
-}
-
-function login() {
-  const user = document.getElementById("loginUser").value;
-  const pass = document.getElementById("loginPass").value;
-  if (user === "Chef" && pass === "admin") {
-    localStorage.setItem("loggedInUser", user);
-    applyLoginUI();
-    switchTab("kaufbar");
-  } else {
-    alert("Zugang verweigert");
-  }
-}
-
-function logout() {
-  localStorage.removeItem("loggedInUser");
-  location.reload();
-}
-
-function applyLoginUI() {
-  document.querySelector(".login-area").style.display = "none";
-  document.getElementById("mainTabs").style.display = "flex";
-  document.getElementById("addBtn").style.display = "inline-block";
-  document.getElementById("logoutBtn").style.display = "inline-block";
-}
-
-function renderFahrzeuge(liste) {
-  const grid = document.getElementById("grid-kaufbar");
-  grid.innerHTML = "";
-
-  for (const [id, vehicle] of Object.entries(liste)) {
-    const div = document.createElement("div");
-    div.className = "category-item";
-    div.setAttribute("data-price", vehicle.price);
-    div.setAttribute("data-speed", vehicle.speed);
-    div.setAttribute("data-weight", vehicle.weight);
-    div.setAttribute("data-acceleration", vehicle.acceleration);
-    div.setAttribute("data-category", vehicle.category);
-    div.onclick = () => openPopup(div);
-
-    div.innerHTML = `
-      <img src="${vehicle.image}" loading="lazy" />
-      <p><strong>${vehicle.name}</strong><br />Preis: ${vehicle.price}$</p>
-    `;
-
-    if (localStorage.getItem("loggedInUser") === "Chef") {
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "🗑️ Löschen";
-      deleteBtn.className = "delete-btn";
-      deleteBtn.onclick = (e) => {
-        e.stopPropagation();
-        remove(ref(db, `kaufbareFahrzeuge/${id}`));
-      };
-      div.appendChild(deleteBtn);
+      const activeBtn = Array.from(document.querySelectorAll('.tabs button')).find(btn =>
+        btn.getAttribute('onclick')?.includes(tabId)
+      );
+      if (activeBtn) activeBtn.classList.add('active');
     }
+  </script>
+</head>
+<body>
+  <header>
+    <h1><a href="#" onclick="switchTab('startseite')">LS-Automobile</a></h1>
+    <div class="login-area">
+      <input type="text" id="loginUser" placeholder="Benutzername">
+      <input type="password" id="loginPass" placeholder="Passwort">
+      <button onclick="login()">Login</button>
+      <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+    </div>
+    <nav class="tabs" id="mainTabs">
+      <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
+      <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
+    </nav>
+  </header>
 
-    grid.appendChild(div);
-  }
-}
+  <section id="startseite" class="tab-content active">
+    <div class="startseite-box">
+      <h2>Willkommen bei LS-Automobile</h2>
+      <p>Wir bieten hochwertige Fahrzeuge in Los Santos. Kaufen oder bestellen Sie bequem online.</p>
+    </div>
+  </section>
 
-function openPopup(element) {
-  document.getElementById('popupTitle').innerText = element.querySelector('strong')?.innerText || '';
-  document.getElementById('popupImg').src = element.querySelector('img')?.src || '';
-  document.getElementById('popupCategory').innerText = element.getAttribute('data-category') || '';
-  document.getElementById('popupPrice').innerText = 'Preis: ' + (element.getAttribute('data-price') || '-') + '$';
-  document.getElementById('specSpeed').innerText = element.getAttribute('data-speed') || '-';
-  document.getElementById('specAcceleration').innerText = element.getAttribute('data-acceleration') || '-';
-  document.getElementById('specWeight').innerText = element.getAttribute('data-weight') || '-';
-  document.getElementById('popup').classList.add('active');
-}
+  <section id="kaufbar" class="tab-content">
+    <button class="add-btn" id="addBtn" onclick="openAddForm()">+ Fahrzeug hinzufügen</button>
+    <div class="category-grid" id="grid-kaufbar"></div>
+  </section>
 
-function closePopup() {
-  document.getElementById('popup').classList.remove('active');
-}
+  <section id="bestellbar" class="tab-content">
+    <div class="category-grid" id="grid-bestellbar">
+      <p style="text-align:center;">Hier erscheinen später bestellbare Fahrzeuge.</p>
+    </div>
+  </section>
 
-function openAddForm() {
-  document.getElementById('addForm').classList.add('active');
-}
+  <div id="addForm" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closeAddForm()">&times;</span>
+      <h2>Fahrzeug hinzufügen</h2>
+      <input id="nameInput" placeholder="Fahrzeugname">
+      <input id="priceInput" type="number" placeholder="Preis">
+      <input id="imageInput" placeholder="Bild-URL">
+      <input id="speedInput" placeholder="Höchstgeschwindigkeit">
+      <input id="accelerationInput" placeholder="Beschleunigung">
+      <input id="weightInput" placeholder="Gewicht">
+      <select id="categoryInput">
+        <option value="kompaktwagen">Kompaktwagen</option>
+        <option value="vans">Vans</option>
+        <option value="coupes">Coupes</option>
+        <option value="muscle">Muscle</option>
+        <option value="offroad">Off-Road</option>
+        <option value="suv">SUV</option>
+        <option value="sedans">Sedans</option>
+        <option value="sport">Sport</option>
+        <option value="classicsport">Classic Sport</option>
+        <option value="supersport">Super Sport</option>
+      </select>
+      <button onclick="addNewVehicle()">Hinzufügen</button>
+    </div>
+  </div>
 
-function closeAddForm() {
-  document.getElementById('addForm').classList.remove('active');
-}
-
-function addNewVehicle() {
-  const newVehicle = {
-    name: document.getElementById('nameInput').value,
-    price: parseInt(document.getElementById('priceInput').value),
-    category: document.getElementById("categoryInput").value,
-    image: document.getElementById('imageInput').value,
-    speed: document.getElementById('speedInput').value,
-    weight: document.getElementById('weightInput').value,
-    acceleration: document.getElementById('accelerationInput').value
-  };
-
-  push(fahrzeugeRef, newVehicle).then(() => {
-    closeAddForm();
-  });
-}
-
-window.addEventListener("load", () => {
-  if (localStorage.getItem("loggedInUser") === "Chef") {
-    applyLoginUI();
-    switchTab("kaufbar");
-  } else {
-    switchTab("startseite");
-  }
-
-  onValue(fahrzeugeRef, snapshot => {
-    const data = snapshot.val() || {};
-    renderFahrzeuge(data);
-  });
-});
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <img id="popupImg" src="" alt="Fahrzeugbild">
+      <h2 id="popupTitle"></h2>
+      <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
+      <p><strong id="popupPrice"></strong></p>
+      <div id="popupSpecs">
+        <h3>Technische Daten</h3>
+        <ul>
+          <li><strong>Höchstgeschwindigkeit:</strong> <span id="specSpeed"></span></li>
+          <li><strong>Beschleunigung:</strong> <span id="specAcceleration"></span></li>
+          <li><strong>Gewicht:</strong> <span id="specWeight"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
