@@ -143,12 +143,10 @@ window.addEventListener("load", () => {
   } else {
     switchTab("startseite");
   }
-});
 
   onValue(fahrzeugeRef, snapshot => {
     const data = snapshot.val() || {};
     renderFahrzeuge(data);
   });
-
-  switchTab("startseite");
 });
+
