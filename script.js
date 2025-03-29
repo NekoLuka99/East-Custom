@@ -165,4 +165,3 @@ window.switchTab = switchTab;
 window.openAddForm = openAddForm;
 window.closeAddForm = closeAddForm;
 window.closePopup = closePopup;
-}
