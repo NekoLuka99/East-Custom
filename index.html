@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LS-Automobile</title>
-  <link rel="stylesheet" href="style.css" />
-  <script type="module" src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script type="module" src="script.js"></script>
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+
+      document.querySelectorAll('.tabs button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      const activeBtn = Array.from(document.querySelectorAll('.tabs button')).find(btn =>
+        btn.getAttribute('onclick')?.includes(tabId)
+      );
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+  </script>
 </head>
 <body>
   <header>
     <h1><a href="#" onclick="switchTab('startseite')">LS-Automobile</a></h1>
     <div class="login-area">
-      <input type="email" id="loginUser" placeholder="E-Mail" />
-      <input type="password" id="loginPass" placeholder="Passwort" />
-      <button onclick="login()">Login</button>
-      <button onclick="logout()" id="logoutBtn" style="display:none;">Logout</button>
-    </div>
+  <input type="email" id="loginUser" placeholder="E-Mail">
+  <input type="password" id="loginPass" placeholder="Passwort">
+  <button onclick="login()">Login</button>
+  <button onclick="logout()" id="logoutBtn">Logout</button>
+</div>
     <nav class="tabs" id="mainTabs">
       <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
       <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
@@ -44,12 +63,12 @@
     <div class="popup-content">
       <span class="close-btn" onclick="closeAddForm()">&times;</span>
       <h2>Fahrzeug hinzufügen</h2>
-      <input id="nameInput" placeholder="Fahrzeugname" />
-      <input id="priceInput" type="number" placeholder="Preis" />
-      <input id="imageInput" placeholder="Bild-URL" />
-      <input id="speedInput" placeholder="Höchstgeschwindigkeit" />
-      <input id="accelerationInput" placeholder="Beschleunigung" />
-      <input id="weightInput" placeholder="Gewicht" />
+      <input id="nameInput" placeholder="Fahrzeugname">
+      <input id="priceInput" type="number" placeholder="Preis">
+      <input id="imageInput" placeholder="Bild-URL">
+      <input id="speedInput" placeholder="Höchstgeschwindigkeit">
+      <input id="accelerationInput" placeholder="Beschleunigung">
+      <input id="weightInput" placeholder="Gewicht">
       <select id="categoryInput">
         <option value="kompaktwagen">Kompaktwagen</option>
         <option value="vans">Vans</option>
@@ -69,7 +88,7 @@
   <div class="popup-overlay" id="popup">
     <div class="popup-content">
       <span class="close-btn" onclick="closePopup()">&times;</span>
-      <img id="popupImg" src="" alt="Fahrzeugbild" />
+      <img id="popupImg" src="" alt="Fahrzeugbild">
       <h2 id="popupTitle"></h2>
       <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
       <p><strong id="popupPrice"></strong></p>
@@ -83,5 +102,6 @@
       </div>
     </div>
   </div>
+ 
 </body>
 </html>
