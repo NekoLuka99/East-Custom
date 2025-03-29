@@ -228,6 +228,22 @@ header h1 {
   font-weight: bold;
 }
 
+.delete-btn {
+  margin-top: 10px;
+  background-color: #c62828;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #e53935;
+}
+
 /* === Startseite === */
 .startseite-box {
   max-width: 800px;
