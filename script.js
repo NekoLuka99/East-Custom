@@ -39,7 +39,7 @@ function switchTab(tabId) {
 function login() {
   const user = document.getElementById("loginUser").value;
   const pass = document.getElementById("loginPass").value;
-  if (user === "BobbyNash" && pass === "admin") {
+  if (user === "admin" && pass === "admin") {
     localStorage.setItem("loggedInUser", user);
     applyLoginUI();
     switchTab("kaufbar");
@@ -81,7 +81,7 @@ function renderFahrzeuge(liste) {
       <p><strong>${vehicle.name}</strong><br />Preis: ${vehicle.price}$</p>
     `;
 
-    if (localStorage.getItem("loggedInUser") === "BobbyNash") {
+    if (localStorage.getItem("loggedInUser") === "admin") {
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "🗑️ Löschen";
       deleteBtn.className = "delete-btn";
@@ -137,7 +137,7 @@ function addNewVehicle() {
 
 // Seite laden
 window.addEventListener("load", () => {
-  if (localStorage.getItem("loggedInUser") === "BobbyNash") {
+  if (localStorage.getItem("loggedInUser") === "admin") {
     applyLoginUI();
     switchTab("kaufbar");
   } else {
