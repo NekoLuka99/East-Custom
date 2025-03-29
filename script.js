@@ -1,6 +1,13 @@
 // Neue script.js mit Firebase-Unterstützung
 
 // Firebase einbinden und initialisieren
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 
@@ -18,6 +25,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const fahrzeugeRef = ref(db, "kaufbareFahrzeuge");
+const auth = getAuth(app);
+
 
 // UI-Handling
 function switchTab(tabId) {
@@ -37,22 +46,27 @@ function switchTab(tabId) {
 }
 
 function login() {
-  const user = document.getElementById("loginUser").value;
-  const pass = document.getElementById("loginPass").value;
-  if (user === "BobbyNash" && pass === "admin") {
-    localStorage.setItem("loggedInUser", user);
-    applyLoginUI();
-    switchTab("kaufbar");
-  } else {
-    alert("Zugang verweigert");
-  }
+  const email = document.getElementById("loginUser").value;
+  const password = document.getElementById("loginPass").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      applyLoginUI();
+      switchTab("kaufbar");
+    })
+    .catch((error) => {
+      alert("Login fehlgeschlagen: " + error.message);
+    });
 }
+
 
 
 function logout() {
-  localStorage.removeItem("loggedInUser");
-  location.reload();
+  signOut(auth).then(() => {
+    location.reload();
+  });
 }
+
 
 function applyLoginUI() {
   document.querySelector(".login-area").style.display = "none";
@@ -150,3 +164,11 @@ window.addEventListener("load", () => {
   });
 });
 
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    applyLoginUI();
+    switchTab("kaufbar");
+  } else {
+    switchTab("startseite");
+  }
+});
