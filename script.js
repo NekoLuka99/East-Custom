@@ -172,3 +172,4 @@ onAuthStateChanged(auth, (user) => {
     switchTab("startseite");
   }
 });
+
