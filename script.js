@@ -60,10 +60,17 @@ function login() {
     });
 }
 
+import { signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
 function logout() {
-  localStorage.removeItem("loggedInUser");
-  location.reload();
+  signOut(auth).then(() => {
+    localStorage.removeItem("loggedInUser");
+    location.reload();
+  }).catch((error) => {
+    alert("Fehler beim Logout: " + error.message);
+  });
 }
+
 
 function applyLoginUI() {
   document.querySelector(".login-area").style.display = "none";
