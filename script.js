@@ -177,3 +177,4 @@ window.openAddForm = openAddForm;
 window.closeAddForm = closeAddForm;
 window.addNewVehicle = addNewVehicle;
 window.closePopup = closePopup;
+
