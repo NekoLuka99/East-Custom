@@ -1,1 +1,87 @@
-<!DOCTYPE html><html><head><title>LS-Automobile</title></head><body>Index Placeholder</body></html>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LS-Automobile</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1><a href="#" onclick="switchTab('startseite')">LS-Automobile</a></h1>
+    <div class="login-area">
+      <input type="email" id="loginUser" placeholder="E-Mail" />
+      <input type="password" id="loginPass" placeholder="Passwort" />
+      <button onclick="login()">Login</button>
+      <button onclick="logout()" id="logoutBtn" style="display:none;">Logout</button>
+    </div>
+    <nav class="tabs" id="mainTabs">
+      <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
+      <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
+    </nav>
+  </header>
+
+  <section id="startseite" class="tab-content active">
+    <div class="startseite-box">
+      <h2>Willkommen bei LS-Automobile</h2>
+      <p>Wir bieten hochwertige Fahrzeuge in Los Santos. Kaufen oder bestellen Sie bequem online.</p>
+    </div>
+  </section>
+
+  <section id="kaufbar" class="tab-content">
+    <button class="add-btn" id="addBtn" onclick="openAddForm()">+ Fahrzeug hinzufügen</button>
+    <div class="category-grid" id="grid-kaufbar"></div>
+  </section>
+
+  <section id="bestellbar" class="tab-content">
+    <div class="category-grid" id="grid-bestellbar">
+      <p style="text-align:center;">Hier erscheinen später bestellbare Fahrzeuge.</p>
+    </div>
+  </section>
+
+  <div id="addForm" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closeAddForm()">&times;</span>
+      <h2>Fahrzeug hinzufügen</h2>
+      <input id="nameInput" placeholder="Fahrzeugname" />
+      <input id="priceInput" type="number" placeholder="Preis" />
+      <input id="imageInput" placeholder="Bild-URL" />
+      <input id="speedInput" placeholder="Höchstgeschwindigkeit" />
+      <input id="accelerationInput" placeholder="Beschleunigung" />
+      <input id="weightInput" placeholder="Gewicht" />
+      <select id="categoryInput">
+        <option value="kompaktwagen">Kompaktwagen</option>
+        <option value="vans">Vans</option>
+        <option value="coupes">Coupes</option>
+        <option value="muscle">Muscle</option>
+        <option value="offroad">Off-Road</option>
+        <option value="suv">SUV</option>
+        <option value="sedans">Sedans</option>
+        <option value="sport">Sport</option>
+        <option value="classicsport">Classic Sport</option>
+        <option value="supersport">Super Sport</option>
+      </select>
+      <button onclick="addNewVehicle()">Hinzufügen</button>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <img id="popupImg" src="" alt="Fahrzeugbild" />
+      <h2 id="popupTitle"></h2>
+      <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
+      <p><strong id="popupPrice"></strong></p>
+      <div id="popupSpecs">
+        <h3>Technische Daten</h3>
+        <ul>
+          <li><strong>Höchstgeschwindigkeit:</strong> <span id="specSpeed"></span></li>
+          <li><strong>Beschleunigung:</strong> <span id="specAcceleration"></span></li>
+          <li><strong>Gewicht:</strong> <span id="specWeight"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
