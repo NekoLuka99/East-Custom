@@ -20,6 +20,7 @@
     </div>
     <nav class="tabs" id="mainTabs">
       <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
+      <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
     </nav>
   </header>
 
@@ -33,6 +34,12 @@
   <section id="kaufbar" class="tab-content">
     <button class="add-btn" id="addBtn" onclick="openAddForm()">+ Fahrzeug hinzufügen</button>
     <div class="category-grid" id="grid-kaufbar"></div>
+  </section>
+
+  <section id="bestellbar" class="tab-content">
+    <div class="category-grid" id="grid-bestellbar">
+      <p style="text-align:center;">Hier erscheinen später bestellbare Fahrzeuge.</p>
+    </div>
   </section>
 
   <div id="addForm" class="popup-overlay">
