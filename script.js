@@ -175,4 +175,5 @@ window.logout = logout;
 window.switchTab = switchTab;
 window.openAddForm = openAddForm;
 window.closeAddForm = closeAddForm;
+window.addNewVehicle = addNewVehicle;
 window.closePopup = closePopup;
