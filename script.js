@@ -158,3 +158,11 @@ window.addEventListener("load", () => {
     renderFahrzeuge(data);
   });
 });
+
+window.login = login;
+window.logout = logout;
+window.switchTab = switchTab;
+window.openAddForm = openAddForm;
+window.closeAddForm = closeAddForm;
+window.closePopup = closePopup;
+}
