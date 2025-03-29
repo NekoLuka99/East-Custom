@@ -164,6 +164,14 @@ header h1 {
   font-size: 15px;
   outline: none;
   transition: background 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.popup-content select option {
+  background-color: #2a2a2a;
+  color: #fff;
 }
 
 .popup-content input:focus,
