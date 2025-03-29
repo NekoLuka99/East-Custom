@@ -30,11 +30,11 @@
   <header>
     <h1><a href="#" onclick="switchTab('startseite')">LS-Automobile</a></h1>
     <div class="login-area">
-      <input type="text" id="loginUser" placeholder="Benutzername">
-      <input type="password" id="loginPass" placeholder="Passwort">
-      <button onclick="login()">Login</button>
-      <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
-    </div>
+  <input type="email" id="loginUser" placeholder="E-Mail">
+  <input type="password" id="loginPass" placeholder="Passwort">
+  <button onclick="login()">Login</button>
+  <button onclick="logout()" id="logoutBtn" style="display:none;">Logout</button>
+</div>
     <nav class="tabs" id="mainTabs">
       <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
       <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
