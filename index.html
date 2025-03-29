@@ -1,70 +1,62 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LS-Automobile</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
-    <h1><a href="#" onclick="switchTab('startseite')" style="text-decoration: none; color: #ff9800;">LS-Automobile</a></h1>
-    <button id="logoutBtn" onclick="logout()" style="display: none; position: absolute; top: 20px; left: 20px;">Logout</button>
+    <h1><a href="#" onclick="switchTab('startseite')">LS-Automobile</a></h1>
     <div class="login-area">
       <input type="text" id="loginUser" placeholder="Benutzername">
       <input type="password" id="loginPass" placeholder="Passwort">
       <button onclick="login()">Login</button>
+      <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
     </div>
     <nav class="tabs" id="mainTabs">
       <button onclick="switchTab('kaufbar')">Kaufbare Fahrzeuge</button>
-      <button onclick="switchTab('bestellbar')">Bestellbare Fahrzeuge</button>
     </nav>
   </header>
 
   <section id="startseite" class="tab-content active">
-  <div class="startseite-box">
-    <h2>Willkommen bei LS-Automobile</h2>
-    <p>
-      Wir sind dein Ansprechpartner für den Kauf und die Bestellung von hochwertigen Fahrzeugen in Los Santos. 
-      Unser Ziel ist es, dir den besten Service und die schnellste Lieferung im gesamten Bundesstaat zu bieten.
-    </p>
-    <p>
-      Egal ob Sportwagen, Klassiker oder Alltagsfahrzeug – bei uns findest du alles, was dein Herz begehrt.
-    </p>
-  </div>
-</section>
-  
+    <div class="startseite-box">
+      <h2>Willkommen bei LS-Automobile</h2>
+      <p>Wir bieten hochwertige Fahrzeuge in Los Santos. Kaufen oder bestellen Sie bequem online.</p>
+    </div>
+  </section>
+
   <section id="kaufbar" class="tab-content">
     <button class="add-btn" id="addBtn" onclick="openAddForm()">+ Fahrzeug hinzufügen</button>
     <div class="category-grid" id="grid-kaufbar"></div>
   </section>
 
-  <section id="bestellbar" class="tab-content">
-    <p style="text-align:center;">Hier erscheinen später bestellbare Fahrzeuge.</p>
-  </section>
-  
   <div id="addForm" class="popup-overlay">
     <div class="popup-content">
       <span class="close-btn" onclick="closeAddForm()">&times;</span>
       <h2>Fahrzeug hinzufügen</h2>
-      <input id="nameInput" placeholder="Fahrzeugname" />
-      <input id="priceInput" type="number" placeholder="Preis" />
-      <input id="imageInput" placeholder="Bild-URL" />
-      <input id="speedInput" placeholder="Höchstgeschwindigkeit" />
-      <input id="accelerationInput" placeholder="Beschleunigung" />
-      <input id="weightInput" placeholder="Gewicht" />
-<select id="categoryInput">
-  <option value="kompaktwagen">Kompaktwagen</option>
-  <option value="vans">Vans</option>
-  <option value="coupes">Coupes</option>
-  <option value="muscle">Muscle</option>
-  <option value="offroad">Off-Road</option>
-  <option value="suv">SUV</option>
-  <option value="sedans">Sedans</option>
-  <option value="sport">Sport</option>
-  <option value="classicsport">Classic Sport</option>
-  <option value="supersport">Super Sport</option>
-</select>
+      <input id="nameInput" placeholder="Fahrzeugname">
+      <input id="priceInput" type="number" placeholder="Preis">
+      <input id="imageInput" placeholder="Bild-URL">
+      <input id="speedInput" placeholder="Höchstgeschwindigkeit">
+      <input id="accelerationInput" placeholder="Beschleunigung">
+      <input id="weightInput" placeholder="Gewicht">
+      <select id="categoryInput">
+        <option value="kompaktwagen">Kompaktwagen</option>
+        <option value="vans">Vans</option>
+        <option value="coupes">Coupes</option>
+        <option value="muscle">Muscle</option>
+        <option value="offroad">Off-Road</option>
+        <option value="suv">SUV</option>
+        <option value="sedans">Sedans</option>
+        <option value="sport">Sport</option>
+        <option value="classicsport">Classic Sport</option>
+        <option value="supersport">Super Sport</option>
+      </select>
       <button onclick="addNewVehicle()">Hinzufügen</button>
     </div>
   </div>
@@ -72,13 +64,13 @@
   <div class="popup-overlay" id="popup">
     <div class="popup-content">
       <span class="close-btn" onclick="closePopup()">&times;</span>
-      <img id="popupImg" src="" alt="Fahrzeugbild" />
+      <img id="popupImg" src="" alt="Fahrzeugbild">
       <h2 id="popupTitle"></h2>
       <p><strong>Kategorie:</strong> <span id="popupCategory"></span></p>
       <p><strong id="popupPrice"></strong></p>
-      <div id="popupSpecs" style="margin-top: 15px; text-align: left;">
-        <h3 style="color:#ff9800;">Technische Daten</h3>
-        <ul style="list-style: none; padding-left: 0;">
+      <div id="popupSpecs">
+        <h3>Technische Daten</h3>
+        <ul>
           <li><strong>Höchstgeschwindigkeit:</strong> <span id="specSpeed"></span></li>
           <li><strong>Beschleunigung:</strong> <span id="specAcceleration"></span></li>
           <li><strong>Gewicht:</strong> <span id="specWeight"></span></li>
@@ -86,35 +78,5 @@
       </div>
     </div>
   </div>
-
-  <script src="script.js"></script>
-  <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyByFfqbOOAf4nTWlzMmC9jqJHpgdBipwHQ",
-    authDomain: "ls-automobile.firebaseapp.com",
-    databaseURL: "https://ls-automobile-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "ls-automobile",
-    storageBucket: "ls-automobile.firebasestorage.app",
-    messagingSenderId: "1058858305130",
-    appId: "1:1058858305130:web:7a22c1db60d39b247dac13",
-    measurementId: "G-YFBF8NTHF3"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
 </body>
 </html>
