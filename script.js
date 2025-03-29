@@ -49,14 +49,21 @@ function login() {
   const email = document.getElementById("loginUser").value;
   const password = document.getElementById("loginPass").value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      applyLoginUI();
-      switchTab("kaufbar");
-    })
-    .catch((error) => {
-      alert("Login fehlgeschlagen: " + error.message);
-    });
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+const auth = getAuth(app);
+
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Erfolgreich eingeloggt
+    const user = userCredential.user;
+    localStorage.setItem("loggedInUser", user.email);
+    applyLoginUI();
+    switchTab("kaufbar");
+  })
+  .catch((error) => {
+    alert("Login fehlgeschlagen: " + error.message);
+  });
 }
 
 
