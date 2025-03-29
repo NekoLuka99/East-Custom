@@ -220,12 +220,6 @@ header h1 {
 
 #logoutBtn {
   display: none;
-}
-body.logged-in #logoutBtn {
-  display: inline-block;
-}
-
-#logoutBtn {
   background-color: #ff9800;
   color: #111;
   border: none;
@@ -233,7 +227,15 @@ body.logged-in #logoutBtn {
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
+
+body.logged-in #logoutBtn {
+  align-self: flex-start;
+  margin-top: 15px;
+}
+
 
 .delete-btn {
   margin-top: 10px;
