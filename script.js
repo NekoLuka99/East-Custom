@@ -48,6 +48,7 @@ function login() {
   }
 }
 
+
 function logout() {
   localStorage.removeItem("loggedInUser");
   location.reload();
@@ -138,7 +139,11 @@ function addNewVehicle() {
 window.addEventListener("load", () => {
   if (localStorage.getItem("loggedInUser") === "BobbyNash") {
     applyLoginUI();
+    switchTab("kaufbar");
+  } else {
+    switchTab("startseite");
   }
+});
 
   onValue(fahrzeugeRef, snapshot => {
     const data = snapshot.val() || {};
