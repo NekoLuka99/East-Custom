@@ -64,6 +64,17 @@ function renderFahrzeuge() {
     `;
     grid.appendChild(div);
   });
+  
+  if (localStorage.getItem("loggedInUser") === "BobbyNash") {
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "🗑️ Löschen";
+  deleteBtn.className = "delete-btn";
+  deleteBtn.onclick = (e) => {
+    e.stopPropagation(); // verhindert Öffnen des Popups
+    kaufbareFahrzeuge.splice(index, 1); // Entfernt das Fahrzeug aus dem Array
+    renderFahrzeuge(); // Neu laden
+  };
+  div.appendChild(deleteBtn);
 }
 
 function openPopup(element) {
