@@ -21,35 +21,23 @@ function login() {
   const user = document.getElementById("loginUser").value;
   const pass = document.getElementById("loginPass").value;
   if (user === "BobbyNash" && pass === "admin") {
-    localStorage.setItem("loggedInUser", user); // speichern
-    document.querySelector(".login-area").style.display = "none";
-    document.getElementById("mainTabs").style.display = "flex";
-    document.getElementById("addBtn").style.display = "inline-block";
+    localStorage.setItem("loggedInUser", user);
+    applyLoginUI();
     switchTab("kaufbar");
   } else {
     alert("Zugang verweigert");
   }
 }
-window.addEventListener("load", () => {
-  if (localStorage.getItem("loggedInUser") === "BobbyNash") {
-    applyLoginUI();
-    document.getElementById("logoutBtn").style.display = "inline-block";
-  }
-  renderBestellfahrzeuge?.();
-  renderFahrzeuge?.(kaufbareFahrzeuge, "grid-kaufbar");
-  renderFahrzeuge?.(bestellbareFahrzeuge, "grid-bestellbar");
-  switchTab("startseite");
-});
 
 function logout() {
   localStorage.removeItem("loggedInUser");
-  location.reload(); // Seite neu laden, um UI zurückzusetzen
+  location.reload();
 }
 
 function renderFahrzeuge() {
   const grid = document.getElementById("grid-kaufbar");
   grid.innerHTML = "";
-  kaufbareFahrzeuge.forEach(vehicle => {
+  kaufbareFahrzeuge.forEach((vehicle, index) => {
     const div = document.createElement("div");
     div.className = "category-item";
     div.setAttribute("data-price", vehicle.price);
@@ -62,19 +50,21 @@ function renderFahrzeuge() {
       <img src="${vehicle.image}" loading="lazy" />
       <p><strong>${vehicle.name}</strong><br />Preis: ${vehicle.price}$</p>
     `;
+
+    if (localStorage.getItem("loggedInUser") === "BobbyNash") {
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "🗑️ Löschen";
+      deleteBtn.className = "delete-btn";
+      deleteBtn.onclick = (e) => {
+        e.stopPropagation();
+        kaufbareFahrzeuge.splice(index, 1);
+        renderFahrzeuge();
+      };
+      div.appendChild(deleteBtn);
+    }
+
     grid.appendChild(div);
   });
-  
-  if (localStorage.getItem("loggedInUser") === "BobbyNash") {
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "🗑️ Löschen";
-  deleteBtn.className = "delete-btn";
-  deleteBtn.onclick = (e) => {
-    e.stopPropagation(); // verhindert Öffnen des Popups
-    kaufbareFahrzeuge.splice(index, 1); // Entfernt das Fahrzeug aus dem Array
-    renderFahrzeuge(); // Neu laden
-  };
-  div.appendChild(deleteBtn);
 }
 
 function openPopup(element) {
@@ -130,4 +120,12 @@ function applyLoginUI() {
   document.getElementById("logoutBtn").style.display = "inline-block";
 }
 
-
+window.addEventListener("load", () => {
+  if (localStorage.getItem("loggedInUser") === "BobbyNash") {
+    applyLoginUI();
+  }
+  renderBestellfahrzeuge?.();
+  renderFahrzeuge?.();
+  renderFahrzeuge?.(bestellbareFahrzeuge, "grid-bestellbar");
+  switchTab("startseite");
+});
